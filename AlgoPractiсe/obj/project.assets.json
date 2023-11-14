@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\RiderProjects\\AlgoPractise\\AlgoPractise\\AlgoPractise.csproj",
-      "projectName": "AlgoPractise",
-      "projectPath": "D:\\RiderProjects\\AlgoPractise\\AlgoPractise\\AlgoPractise.csproj",
+      "projectUniqueName": "D:\\RiderProjects\\AlgoPractise\\AlgoPractiсe\\AlgoPractiсe.csproj",
+      "projectName": "AlgoPractiсe",
+      "projectPath": "D:\\RiderProjects\\AlgoPractise\\AlgoPractiсe\\AlgoPractiсe.csproj",
       "packagesPath": "C:\\Users\\79681\\.nuget\\packages\\",
-      "outputPath": "D:\\RiderProjects\\AlgoPractise\\AlgoPractise\\obj\\",
+      "outputPath": "D:\\RiderProjects\\AlgoPractise\\AlgoPractiсe\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

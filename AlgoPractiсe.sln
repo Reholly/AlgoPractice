@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoPractise", "AlgoPractise\AlgoPractise.csproj", "{44DE655C-D51F-4B8C-8C52-2364E82F8E14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoPractiсe", "AlgoPractiсe\AlgoPractiсe.csproj", "{44DE655C-D51F-4B8C-8C52-2364E82F8E14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
