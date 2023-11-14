@@ -1,0 +1,15 @@
+D:\RiderProjects\AlgoPractise\AlgoPractise\bin\Debug\net7.0\AlgoPractise.exe
+D:\RiderProjects\AlgoPractise\AlgoPractise\bin\Debug\net7.0\AlgoPractise.deps.json
+D:\RiderProjects\AlgoPractise\AlgoPractise\bin\Debug\net7.0\AlgoPractise.runtimeconfig.json
+D:\RiderProjects\AlgoPractise\AlgoPractise\bin\Debug\net7.0\AlgoPractise.dll
+D:\RiderProjects\AlgoPractise\AlgoPractise\bin\Debug\net7.0\AlgoPractise.pdb
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\AlgoPractise.csproj.AssemblyReference.cache
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\AlgoPractise.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\AlgoPractise.AssemblyInfoInputs.cache
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\AlgoPractise.AssemblyInfo.cs
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\AlgoPractise.csproj.CoreCompileInputs.cache
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\AlgoPractise.dll
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\refint\AlgoPractise.dll
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\AlgoPractise.pdb
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\AlgoPractise.genruntimeconfig.cache
+D:\RiderProjects\AlgoPractise\AlgoPractise\obj\Debug\net7.0\ref\AlgoPractise.dll
