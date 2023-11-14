@@ -8,32 +8,36 @@ public class FordFalkerson
     {
         //Копируем исходный граф во временную матрицу смежности. Ее мы и будет изменять
         int[][] tempGraph = new int[vertices][];
-        for (int u = 0; u < vertices; u++)
+        for (int i = 0; i < vertices; i++)
         {
-            tempGraph[u] = new int[vertices];
+            tempGraph[i] = new int[vertices];
             for (int v = 0; v < vertices; v++)
             {
-                tempGraph[u][v] = graph.AdjacencyMatrix[u][v];
+                tempGraph[i][v] = graph.AdjacencyMatrix[i][v];
             }
         }
         //Создаем массив "родителей" вершин.
-        int[] parent = new int[vertices];
+        int[] parents = new int[vertices]; //в парентс лежат последние вершины-родители при поиске в глубину, который нашли.
         int maxFlow = 0;
 
-        while (Bfs(tempGraph,  vertices, source, sink, parent))
+        //Пока путь ЕСТЬ, мы выполняем алгоритм. (путь ищется BFS-ом)
+        while (Bfs(tempGraph,  vertices, source, sink, parents))
         {
             int pathFlow = int.MaxValue;
-            for (int v = sink; v != source; v = parent[v])
+            //Ищем минимальный поток в пути образовавшемся. Путь мы достаем из parents,
+            //который изменился после проходки BFS.
+            for (int i = sink; i != source; i = parents[i])
             {
-                int u = parent[v];
-                pathFlow = Math.Min(pathFlow, tempGraph[u][v]);
+                int iVertexParent = parents[i];
+                pathFlow = Math.Min(pathFlow, tempGraph[iVertexParent][i]);
             }
-
-            for (int v = sink; v != source; v = parent[v])
+            //Меняем исходный граф. Мы делаем что-то вроде ребра "обратного потока" (на хабре есть статья).
+            //
+            for (int i = sink; i != source; i = parents[i])
             {
-                int u = parent[v];
-                tempGraph[u][v] -= pathFlow;
-                tempGraph[v][u] += pathFlow;
+                int currentVertexParent = parents[i];
+                tempGraph[currentVertexParent][i] -= pathFlow;
+                tempGraph[i][currentVertexParent] += pathFlow;
             }
 
             maxFlow += pathFlow;
