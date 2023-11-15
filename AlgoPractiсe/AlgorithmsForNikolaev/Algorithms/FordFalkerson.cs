@@ -5,17 +5,21 @@ namespace AlgoPractise.AlgorithmsForNikolaev.Algorithms;
 public class FordFalkerson
 {
     private List<string> _steps = new List<string>();
+    
+    //первое лист всех путей вершин, второе лист всех шагов
 
-    public List<string> GetSteps(Graph graph, int vertices, int source, int sink)
+    public (List<List<string>>, List<string>) GetSteps(Graph graph, int vertices, int source, int sink)
     {
         _steps.Clear();
-        int maxFlow = FordFulkerson(graph, vertices, source, sink);
-        _steps.Add($"Максимальный поток найден: {maxFlow}. ");
-        return _steps;
+        var result = FordFulkerson(graph, vertices, source, sink);
+        _steps.Add($"Максимальный поток найден: {result.Item2}. ");
+        return (result.Item1, _steps);
     }
-    public int FordFulkerson(Graph graph, int vertices, int source, int sink)
+    public (List<List<string>>,int) FordFulkerson(Graph graph, int vertices, int source, int sink)
     {
         //Копируем исходный граф во временную матрицу смежности. Ее мы и будет изменять
+        List<List<string>> allPaths = new List<List<string>>();
+        
         int[][] tempGraph = new int[vertices][];
         for (int i = 0; i < vertices; i++)
         {
@@ -37,11 +41,14 @@ public class FordFalkerson
             int pathFlow = int.MaxValue;
             //Ищем минимальный поток в пути образовавшемся. Путь мы достаем из parents,
             //который изменился после проходки BFS.
+            List<string> currentPath = new List<string>();
             for (int i = sink; i != source; i = parents[i])
             {
                 int iVertexParent = parents[i];
+                currentPath.Add(graph.VerticesNames[iVertexParent]);
                 pathFlow = Math.Min(pathFlow, tempGraph[iVertexParent][i]);
             }
+            allPaths.Add(currentPath);
             _steps.Add($"Минимальный поток в найденном пути: {pathFlow}");
             //Меняем исходный граф. Мы делаем что-то вроде ребра "обратного потока" (на хабре есть статья).
             /* Это своеобразные ребра, по которым можно вернуть жидкость обратно из одной точки в другую.
@@ -70,7 +77,7 @@ public class FordFalkerson
             maxFlow += pathFlow;
         }
 
-        return maxFlow;
+        return (allPaths, maxFlow);
     }
     
     private bool Bfs(int[][] residualGraph, int vertices, int source, int sink, int[] parents)

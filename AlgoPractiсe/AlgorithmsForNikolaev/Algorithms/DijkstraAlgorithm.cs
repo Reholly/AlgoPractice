@@ -1,3 +1,4 @@
+using System.Text;
 using AlgoPractise.AlgorithmsForNikolaev.Models;
 
 namespace AlgoPractise.AlgorithmsForNikolaev.Algorithms;
@@ -6,6 +7,7 @@ public class DijkstraAlgorithm
 {
     public List<(string[], string)> _steps = new List<(string[], string)>();
 
+    //Первое путь, второе список из текущего пути и описания шага
     public (int, List<(string[], string)>) GetSteps(Graph graph, int startVertex, int endVertex)
     {
         _steps.Clear();
@@ -19,7 +21,8 @@ public class DijkstraAlgorithm
             newList.Add(i);
         }
         newList.Add(graph.VerticesNames[graph.Vertices - 1]);
-        _steps.Add((newList.ToArray(), "Финальный шаг: нашли нужную вершину"));
+        _steps.Add((newList.ToArray(), $"Финальный шаг: нашли нужную вершину {graph.VerticesNames[endVertex]}" +
+                                       $" и кратчайший путь равен: {path}"));
         return (path, _steps);
     }
     
@@ -51,7 +54,7 @@ public class DijkstraAlgorithm
                     vertices.Add(graph.VerticesNames[flag]);
                 }
             }
-            _steps.Add((vertices.ToArray(), $"Проходим дальше по вершинам и выбираем минимальную, полученный мин.путь для вершины {graph.VerticesNames[i]} = {distances[i]} и получаем путь: "));
+
             if (usedVertices[endVertex])
             {
                 return distances[endVertex];
@@ -63,6 +66,7 @@ public class DijkstraAlgorithm
             //текущей дистанции до j-ой вершины  до ребра и
             // (расстояние до minDistanceVertex  + расстояние до j-ой вершины от minDistanceVertex)
             
+            _steps.Add((vertices.ToArray(),"Обновляем дистанции по условию  (условие описано выше)."));
             for (int j = 0; j < graph.Vertices; j++)
             {
                 if (!usedVertices[j] &&
@@ -73,6 +77,18 @@ public class DijkstraAlgorithm
                     distances[j] = distances[minDistanceVertex] + graph.AdjacencyMatrix[minDistanceVertex][j];
                 }
             }
+            
+            StringBuilder currentDistances = new StringBuilder();
+            for (var x =0; x < distances.Length; x++)
+            {
+                currentDistances.Append($"Кр. путь до {graph.VerticesNames[x]} : {distances[x]}, ");
+            }
+            _steps.Add((vertices.ToArray(), $"Текущие дистанции {currentDistances.ToString()}. Проходим дальше по вершинам и выбираем следующую вершину по следующим условиям:" +
+                                            $"1) мы НЕ прошли эту вершин. 2) расстояние не равно бесконечности. 3) есть ли дорога к узлу." +
+                                            $"4) новое расстояние до ребра равно минимуму из текущей дистанции до j-ой вершины  до ребра и " +
+                                            $"(расстояние до minDistanceVertex  + расстояние до j-ой вершины от minDistanceVertex)" +
+                                            $"  Получили, что по условиям идем в вершину: {graph.VerticesNames[i]} = {distances[i]} и получаем путь: "));
+
         }
 
         return distances[endVertex];

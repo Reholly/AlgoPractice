@@ -86,9 +86,16 @@ var maxFlow = new FordFalkerson();
 Console.WriteLine(maxFlow.FordFulkerson(graph, graph.Vertices, 0, 5));
 var maxFlowSteps = maxFlow.GetSteps(graph, graph.Vertices, 0, 5);
 Console.WriteLine("Начинаем поиск макс. потока. ");
-foreach (var i in maxFlowSteps)
+foreach (var i in maxFlowSteps.Item2)
     Console.WriteLine(i);
-
+foreach (var i in maxFlowSteps.Item1)
+{
+    Console.WriteLine("Путь: ");
+    foreach (var j in i)
+    {
+        Console.Write(j + " ");
+    }
+}
 
 
 Console.WriteLine($"Depth First Search in {unorientedGraph.Title} graph:");

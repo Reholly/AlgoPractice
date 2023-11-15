@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "1v7dsw+0w8o4oxW33iJLTRF2Yeq0+CDho1no55puFOqneryVap1Dg4ic9RnQF655/dYzqkY9pIuyrIt1B+Q0rg==",
+  "dgSpecHash": "iKVSIM3+pgSisl9j1SOhxpPBLl+6p5wS2FR4ooZ1v+iDzRvpmsO4KbbdkfQulLgHv9jfRtNGkluErHM1ttyu8Q==",
   "success": true,
   "projectFilePath": "D:\\RiderProjects\\AlgoPractise\\AlgoPractiсe\\AlgoPractiсe.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\79681\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\79681\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\79681\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\79681\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }
