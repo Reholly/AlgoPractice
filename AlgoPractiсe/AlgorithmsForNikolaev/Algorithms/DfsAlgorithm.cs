@@ -19,7 +19,8 @@ public class DfsAlgorithm
     private void DfsUtil(int currentVertex, Graph graph, bool[] visitedVertices)
     {
         visitedVertices[currentVertex] = true;
-        _steps.Add(graph.VerticesNames[currentVertex]);
+        _steps.Add($"Прошли вершину {graph.VerticesNames[currentVertex]}, пометили эту вершину пройденной - туда больше пути нет.");
+
         for (int i = 0; i < graph.AdjacencyMatrix[currentVertex].Length; i++)
         {
             if (!visitedVertices[i] && graph.AdjacencyMatrix[currentVertex][i] >= 1)

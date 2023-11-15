@@ -4,6 +4,25 @@ namespace AlgoPractise.AlgorithmsForNikolaev.Algorithms;
 
 public class DijkstraAlgorithm
 {
+    public List<(string[], string)> _steps = new List<(string[], string)>();
+
+    public (int, List<(string[], string)>) GetSteps(Graph graph, int startVertex, int endVertex)
+    {
+        _steps.Clear();
+
+        int path = GetShortestPath(graph, startVertex, endVertex);
+        var lasVertices = _steps[_steps.Count - 1];
+        var newList = new List<string>();
+
+        foreach (var i in lasVertices.Item1)
+        {
+            newList.Add(i);
+        }
+        newList.Add(graph.VerticesNames[graph.Vertices - 1]);
+        _steps.Add((newList.ToArray(), "Финальный шаг: нашли нужную вершину"));
+        return (path, _steps);
+    }
+    
     public int GetShortestPath(Graph graph, int startVertex, int endVertex)
     {
         int[] distances = new int[graph.Vertices];
@@ -14,6 +33,7 @@ public class DijkstraAlgorithm
         {
             distances[i] = int.MaxValue;
         }
+     
         //Расстояние от началльной вершины до нее самой равно нулю
         distances[startVertex] = 0;
         //Ищем все кратчайшие пути до вершин.
@@ -23,7 +43,20 @@ public class DijkstraAlgorithm
             int minDistanceVertex = MinDistanceVertex(distances, usedVertices);
             //Помечаем вершину как пройденную 
             usedVertices[minDistanceVertex] = true;
-
+            List<string> vertices = new List<string>();
+            for (int flag = 0; flag < usedVertices.Length; flag++)
+            {
+                if (usedVertices[flag])
+                {
+                    vertices.Add(graph.VerticesNames[flag]);
+                }
+            }
+            _steps.Add((vertices.ToArray(), $"Проходим дальше по вершинам и выбираем минимальную, полученный мин.путь для вершины {graph.VerticesNames[i]} = {distances[i]} и получаем путь: "));
+            if (usedVertices[endVertex])
+            {
+                return distances[endVertex];
+            }
+            
             //Обновляем массив длин на этом шаге.
             //Проверяем есть ли вообще дорога в узел, не прошли ли мы уже его, не равен ли он "бесконечности" (int.MaxValue)
             //И условие новой стоимости перемещения к ребру: новое расстояние до ребра равно минимуму из 

@@ -4,6 +4,15 @@ namespace AlgoPractise.AlgorithmsForNikolaev.Algorithms;
 
 public class FordFalkerson
 {
+    private List<string> _steps = new List<string>();
+
+    public List<string> GetSteps(Graph graph, int vertices, int source, int sink)
+    {
+        _steps.Clear();
+        int maxFlow = FordFulkerson(graph, vertices, source, sink);
+        _steps.Add($"Максимальный поток найден: {maxFlow}. ");
+        return _steps;
+    }
     public int FordFulkerson(Graph graph, int vertices, int source, int sink)
     {
         //Копируем исходный граф во временную матрицу смежности. Ее мы и будет изменять
@@ -16,6 +25,7 @@ public class FordFalkerson
                 tempGraph[i][v] = graph.AdjacencyMatrix[i][v];
             }
         }
+        _steps.Add($"Копируем исходный граф во временную матрицу смежности. Она будет служить сетью для изменений. ");
         //Создаем массив "родителей" вершин.
         int[] parents = new int[vertices]; //в парентс лежат последние вершины-родители при поиске в глубину, который нашли.
         int maxFlow = 0;
@@ -23,6 +33,7 @@ public class FordFalkerson
         //Пока путь ЕСТЬ, мы выполняем алгоритм. (путь ищется BFS-ом)
         while (Bfs(tempGraph,  vertices, source, sink, parents))
         {
+            _steps.Add($"Путь был найден, продолжаем алгоритм. ");
             int pathFlow = int.MaxValue;
             //Ищем минимальный поток в пути образовавшемся. Путь мы достаем из parents,
             //который изменился после проходки BFS.
@@ -31,6 +42,7 @@ public class FordFalkerson
                 int iVertexParent = parents[i];
                 pathFlow = Math.Min(pathFlow, tempGraph[iVertexParent][i]);
             }
+            _steps.Add($"Минимальный поток в найденном пути: {pathFlow}");
             //Меняем исходный граф. Мы делаем что-то вроде ребра "обратного потока" (на хабре есть статья).
             /* Это своеобразные ребра, по которым можно вернуть жидкость обратно из одной точки в другую.
              * Этто нужно для оптимального решения, так как иногда путь, который мы нашли, может быть не оптимальным и
@@ -45,10 +57,16 @@ public class FordFalkerson
             for (int i = sink; i != source; i = parents[i])
             {
                 int currentVertexParent = parents[i];
+                _steps.Add($"Устанавливаем следующее: во временном графе по индексу {currentVertexParent},{i} к этому элементу и " +
+                           $" {tempGraph[currentVertexParent][i]} - {pathFlow}. Уменьшаем на мин.поток текущий поток по пути " +
+                           $"найденному. ");
                 tempGraph[currentVertexParent][i] -= pathFlow;
+                _steps.Add($"Устанавливаем следующее: во временном графе по индексу {i},{currentVertexParent} к этому элементу и " +
+                           $" {tempGraph[i][currentVertexParent]} + {pathFlow}. Увеличиваем на мин.поток текущий поток по пути " +
+                           $"найденному. ");
                 tempGraph[i][currentVertexParent] += pathFlow;
             }
-
+            _steps.Add($"Прибавляем к счетчику максимального потока наш минимальный поток: {maxFlow} += {pathFlow}");
             maxFlow += pathFlow;
         }
 
@@ -57,12 +75,14 @@ public class FordFalkerson
     
     private bool Bfs(int[][] residualGraph, int vertices, int source, int sink, int[] parents)
     {
+        _steps.Add($"Начинаем обход графа в ширину, чтобы найти путь от истока до стока. ");
         bool[] visited = new bool[vertices];
         Queue<int> queue = new Queue<int>();
+        _steps.Add($"Добавили в очередь вершину по номеру {source}, пометили ее как пройденную. ");
         queue.Enqueue(source);
         visited[source] = true;
         parents[source] = -1;
-
+        
         while (queue.Count > 0)
         {
             int u = queue.Dequeue();
@@ -71,6 +91,7 @@ public class FordFalkerson
             {
                 if (!visited[v] && residualGraph[u][v] > 0)
                 {
+                    _steps.Add($"Добавили в очередь вершину по номеру {v}, пометили ее как пройденную. ");
                     queue.Enqueue(v);
                     parents[v] = u;
                     visited[v] = true;

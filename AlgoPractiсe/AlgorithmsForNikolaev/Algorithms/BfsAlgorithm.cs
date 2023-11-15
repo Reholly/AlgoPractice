@@ -24,7 +24,7 @@ public class BfsAlgorithm
                 if (!visitedVertices[i] && graph.AdjacencyMatrix[currentVertex][i] >= 1)
                 {
                     visitedVertices[i] = true;
-                    _steps.Add(graph.VerticesNames[i]);
+                    _steps.Add($"Прошли вершину {graph.VerticesNames[i]}, пометили эту вершину пройденной - туда больше пути нет.");
                     queue.Enqueue(i);
                 }
             }

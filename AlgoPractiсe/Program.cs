@@ -60,6 +60,14 @@ foreach (var i in spanningTreeEdges)
     Console.WriteLine($"Spanning Tree Edge : {i.StartVertex} - {i.EndVertex} - {i.Weight} ");
 Console.Write("\n");
 
+var kruskalSteps = kruskalAlgorithm.GetSteps(unorientedGraph);
+Console.WriteLine("Steps of Kruskal algorithm. ");
+foreach (var i in kruskalSteps.Item2)
+{
+    Console.WriteLine(i);
+}
+
+
 
 //Работает только для графов с неотрицательными ребрами, для ориентированных и неориентированных графов.
 var dijkstra = new DijkstraAlgorithm();
@@ -76,7 +84,11 @@ Console.WriteLine($"The shortes path between 0 and 5 in {graph.Title} is : {shor
 Console.WriteLine($"Max flow between 0 and 5 in {graph.Title}: ");
 var maxFlow = new FordFalkerson();
 Console.WriteLine(maxFlow.FordFulkerson(graph, graph.Vertices, 0, 5));
-  
+var maxFlowSteps = maxFlow.GetSteps(graph, graph.Vertices, 0, 5);
+Console.WriteLine("Начинаем поиск макс. потока. ");
+foreach (var i in maxFlowSteps)
+    Console.WriteLine(i);
+
 
 
 Console.WriteLine($"Depth First Search in {unorientedGraph.Title} graph:");
@@ -90,3 +102,16 @@ BfsAlgorithm bfs = new BfsAlgorithm();
 var stepsBfs = bfs.Bfs(graph, 0);
 foreach (var i in stepsBfs)
     Console.WriteLine($"Current Vertex: {i}");
+    
+var steps = dijkstra.GetSteps(graph, 0, 5);
+
+foreach (var i in steps.Item2)
+{
+    Console.WriteLine(i.Item2);
+    foreach (var j in i.Item1)
+    {
+        Console.Write(j + " ");
+    }
+    Console.WriteLine();
+}
+
